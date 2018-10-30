@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <title>我的导航栏</title>
+
+</head>
+<body>
+    <header></header>
+    <main>
+        <div class="wrapper" id="mainxxx">
+        </div>
+    </main>
+    <footer></footer>
+    <script>
+        keys = {
+            '0':{0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+            '1':{0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
+            '2':{0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
+            'length': 3
+        }
+        hash = {
+            'q': 'qq.com',
+            'w': 'weibo.com',
+            'e': 'ele.me',
+            'r': 'renren.com',
+            't': 'tianya.com',
+            'y': 'youtube.com',
+            'u': 'uc.com',
+            'i': 'iqiyi.com',
+            'o': 'opera.com',
+            'p': undefined,
+            'a': 'acfun.tv',
+            's': 'sohu.com',
+            'z': 'zhihu.com',
+            'm': 'www.mcdonalds.com.cn'
+        }
+        //取出 localStorage 中的 zzz 对应的 hash
+        hashInlocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
+        if(hashInlocalStorage){
+            hash = hashInlocalStorage
+        }
+        //此处实现的就是查看是否有更新的hash列表，如果没有，那么就读取的是原来的hash，但是如果已经更新了hash
+        //那么就将已经更新的hash赋给以前的hash，这样就能保证每次刷新页面之后能保留之前的输入信息的记录
+        // 遍历keys，生成kbd标签
+        index = 0
+        while(index < keys['length']){   // '0' '1'  '2'
+            divxxx = document.createElement('div')
+            mainxxx.appendChild(divxxx)
+            row = keys[index]  // 第一个数组，第二个数组，第三个数组
+            index2 = 0
+            while(index2< row['length']){  // 0~9 0~8 0~6
+                kbdxxx = document.createElement('kbd')
+                kbdxxx.textContent = row[index2] 
+                buttonx = document.createElement('button')
+                buttonx.textContent = '编辑'
+                buttonx.id = row[index2]  //对每一个button都给一个id，id是对应的按键内容
+                buttonx.onclick = function(xsadfag){
+                    //console.log(xsadfag['target']['id'])//这个时候就能取到用户给定的按下的按钮的信息
+                    key = xsadfag['target']['id']  //先得到用户输入的按键
+                    x = prompt('给我一个网址')      //得到按键之后输入一个网址
+                    hash[key] = x                  //将得到的网址赋值到哈希列表中，哈希变更
+                    localStorage.setItem('zzz',JSON.stringify(hash))
+                    //将hash存到了zzz中，localStorage中有很多的桶，其中就定义了一个zzz的桶，里面的内容就是hash
+                    //这句实现的就是将JS的变量存到了浏览器中
+                    console.log(hash)
+                }
+                kbdxxx.appendChild(buttonx)   
+                //生成一个button，给这个button添加内容，然后将button添加到kbd中
+                divxxx.appendChild(kbdxxx)
+                index2 = index2 + 1
+            }
+            index = index + 1
+        }
+
+        document.onkeypress = function(xsadfag){
+            key = xsadfag['key']    //取出生成的哈希列表中的对应输入的键值 q w e
+            webside = hash[key]     //得到自己对应哈希列表中存入的网址
+            console.log(webside)
+            // location.href = 'http://'+webside 
+            //当前界面打开网站，location就是当前地址栏，href就是当前地址栏里面的地址，之前添加http协议，这就可以直接打开了
+            window.open('http://'+webside, '_blank')
+            //在新的窗口打开网站
+        }
+        //这段代码实现的就是判断是否有按键被按下，名字是随便取的
+    </script>
+</body>
+</html>

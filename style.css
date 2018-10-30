@@ -1,0 +1,33 @@
+*{margin: 0; padding: 0;}
+a{text-decoration: none;}
+kbd{
+    border:1px solid red;
+    width: 4em;                    
+    /* 2em表示两个字符的长度 */
+    height: 4em;
+    display: inline-block;
+    text-transform: uppercase;
+    position:relative;
+}
+kbd > button{
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: none;
+}
+kbd:hover > button{    
+    /* 当鼠标移动到kbd上的时候就会出现button中 */
+    display: inline-block;
+}
+main{                       
+    text-align: center;
+}
+#mainxxx{
+    display: inline-block;
+}
+#mainxxx > div:nth-child(2){
+    margin-left: 1em;
+}
+#mainxxx > div:nth-child(3){
+    margin-left: 2em;
+}
