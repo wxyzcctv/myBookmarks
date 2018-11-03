@@ -3,7 +3,7 @@ a{text-decoration: none;}
 kbd{
     border:1px solid red;
     width: 4em;                    
-    /* 2em表示两个字符的长度 */
+    /* 4em表示两个字符的长度 */
     height: 4em;
     display: inline-block;
     text-transform: uppercase;
@@ -19,15 +19,79 @@ kbd:hover > button{
     /* 当鼠标移动到kbd上的时候就会出现button中 */
     display: inline-block;
 }
+body{
+    background: grey url(./wall.jpg) no-repeat center center;
+    /* background总共有6个取值，第一个是颜色，第二个是url，就是选择背景图片的地址，
+    可以是本地地址，也可以是网址，第三个是不要重复，如果没有这个，网页中将会对图片进行重复，
+    第四个是居中，第五个也是居中，这几个顺序没有强制要求。
+    当网速比较慢的时候，刷新的界面就会先显示背景颜色，然后再慢慢地加载需要显示的背景图片 */
+    background-size: cover;
+    /* 让背景图自适应窗口的大小 */
+}
 main{                       
     text-align: center;
+    height: 100vh;
+    /* 100vh：100 viewport height表示的是100的视口高度，即屏幕的高度，
+    这个时候main就将body撑起来了，必须要有高度，没有高度的话，会出现界面上的图片没有出现在界面上规定的位置*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 以上三句就能实现居中，垂直居中和水平居中 */
 }
-#mainxxx{
+.key{
+    width: 50px;
+    height: 40px;
+    background: linear-gradient(to bottom, #292929 0%,#111111 100%);
+    border:1px solid #373737;
+    border-radius: 6px;
+    color:#c5c5c5;
+    box-shadow: 0 0 0 1px #1a1b1c, 0 0 0 2px #1f2020, 0 3px 0 2px #080808;
+    /* 这里设置的就是添加边框，第一个逗号之前的是第一个边框，
+    第二个逗号之前的就是第二个边框，第三个逗号之前的就是第三个边框了。 */
+    /* display: inline-flex; */
+    /* 变为flex元素之后将会出现布局比较混乱，那么变为inline-flex之后布局就变好了 */
+    /* align-items: center; */
+    /* 水平反向的居中 */
+    /* justify-content: center; */
+    /* 竖直方向的居中 */
+    position: relative;
+    font-size: 16px;
+    font-family: Helvetica;
+}
+.row{
+    margin: 28px;
+    /* 设置每一排键盘间的宽度 */
+}
+.row .key{
+    margin: 0 18px;
+    /* 设置每一个按键之间的宽度 */
+}
+#main{
     display: inline-block;
+    /* 将用来包裹内部div的div设置为inline-block */
 }
-#mainxxx > div:nth-child(2){
-    margin-left: 1em;
+#main > div:nth-child(2){
+    margin-left: -22px;
+    /* 将第二个div进行移动，此处就是第二排键盘 */
 }
-#mainxxx > div:nth-child(3){
-    margin-left: 2em;
+#main > div:nth-child(3){
+    margin-left: -110px;
+    /* 将第三个div进行移动，此处就是第三排键盘 */
+}
+.wrapper{
+    background:rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
+.key img{
+    position: absolute;
+    left: 4px;
+    bottom: 2px;
+    width:16px;
+    height: 16px;
+}
+.key .text{
+    position: absolute;
+    left: 4px;
+    top: 2px;
+    /* 让文字居于左上角 */
 }
